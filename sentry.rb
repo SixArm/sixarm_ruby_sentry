@@ -5,7 +5,8 @@
 module Sentry
 end
 
-require_relative 'sentrylib'
+require_relative 'sentry/helpers'
+require_relative 'sentry/array'
 require_relative 'sentry/watch_abstract'
 require_relative 'sentry/watch_uri'
 
