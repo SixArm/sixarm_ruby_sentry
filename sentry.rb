@@ -6,12 +6,14 @@
 require 'sentrylib'
 args = ARGV.to_h
 
-uri     = args['--uri'] || 'http://localhost/'
-n       = args['-n'].to_i | 1
-slow    = args['-s'].to_f
-to      = args['--to']
-include = args['--include']
-exclude = args['--exclude']
+uri          = args['--uri'] || 'http://localhost/'
+n            = args['-n'].to_i | 1
+slow         = args['-s'].to_f
+mail_to      = args['--mail-to'] || ENV['USER'] || ENV['USERNAME']
+mail_from    = args['--mail-from'] || 'sentry'
+mail_subject = args['--mail-subject'] || 'Sentry Alert'
+include      = args['--include']
+exclude      = args['--exclude']
 
 begin
   uri = URI.parse(uri)
@@ -24,5 +26,5 @@ begin
   puts message
 rescue
   puts vitals = [uri,$!,message,`date`,`uname -a`,`w`,`ps -ef`] * "\n\n"
-  if to then send_message_with_headers(vitals,'sentry',to,'sentry') end
+  if to then send_message_with_headers(vitals, mail_from, mail_to, mail_subject) end
 end
