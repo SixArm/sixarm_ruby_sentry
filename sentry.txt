@@ -1,18 +1,25 @@
 
-Sentry 2.2 - By Joel Parker Henderson - joelparkerhenderson@gmail.com
-Copyright 2006 - Creative Commons NonCommercial-ShareAlike 2.5 License
+Sentry 2.3.0 - By Joel Parker Henderson - joelparkerhenderson@gmail.com
+Copyright 2006-2014 - Creative Commons NonCommercial-ShareAlike 2.5 License
 
 Sentry is a web monitoring tool that loads a web page and times it.
+
 Sentry reports errors with diagnostics, and can send these to email.
 
-Syntax: sentry [-u URI] [-n LOOPS] [-s SECS] [-find TEXT] [-to EMAIL]
+Syntax: sentry [options]
 
   --uri http://www.my.com  == specify URI to load
+
   -n 10                    == load the page n times, average the results
   -s 1.00                  == if average time > s then raise "Too slow"
-  --include foo            == page text must contain 'foo'
-  --exclude foo            == page text must NOT contain 'foo'
-  --to me@my.com           == send errors to an email address
+
+  --include foo            == result text must contain the text 'foo'
+  --exclude foo            == result text must NOT contain text 'foo'
+
+  --mail                   == send errors via mail?
+  --mail-to <address>      == send mail to this email address
+  --mail-from <address>    == send mail from this email address
+  --mail-subject <text>    == send mail using this subject
 
 Example: how do I test the web page speed of my local machine?
 
@@ -28,4 +35,6 @@ and have any errors emailed to me along with various system diagnostics?
 
   sentry --uri http://www.my.com -n 5 -s 2 \
          --include Hello \
-         --mail-to me@my.com
+         --mail-to me@example.com
+         --mail-from sentry@example.com
+         --mail-subject "Sentry Alert!"
