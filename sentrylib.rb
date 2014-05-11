@@ -39,14 +39,3 @@ end
 def send_message_with_headers (msg,from,to,subj)
   send_message("From: #{from}\nTo: #{to}\nSubject: #{subj}\n\n"+msg,from,to)
 end
-
-
-#### HASH ####################################################################
-
-class Array
-  def to_h(hash={})
-    a = to_a
-    0.step(a.size,2) { |i| hash[a[i]]=a[i+1] }
-    hash
-  end
-end
