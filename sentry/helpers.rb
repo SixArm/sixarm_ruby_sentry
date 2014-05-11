@@ -9,13 +9,13 @@ require 'net/smtp'
 
 #### HTTP ####################################################################
 
-def get_response (uri)
+def http_get_response (uri)
  res = Net::HTTP.get_response(uri)
  res.code=='200' or res.error!
  return res
 end
 
-def get_response_body (uri)
+def http_get_response_body (uri)
  get_response(uri).body
 end
 
