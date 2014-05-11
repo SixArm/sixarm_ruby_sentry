@@ -5,6 +5,7 @@
 module Sentry
 end
 
+require_relative 'sentry/help'
 require_relative 'sentry/helpers/array'
 require_relative 'sentry/helpers/http'
 require_relative 'sentry/helpers/smtp'
@@ -26,20 +27,6 @@ mail_from    = args['--mail-from'] || 'sentry'
 mail_subject = args['--mail-subject'] || 'Sentry Alert'
 include      = args['--include']
 exclude      = args['--exclude']
-
-
-#### HELP ###################################################################
-
-def help
-  puts "Sentry"
-  puts ""
-  puts "Please specify something to watch."
-  puts ""
-  puts "Example:"
-  puts ""
-  puts "   sentry --uri http://www.example.com"
-  puts ""
-end
 
 
 #### MAIN ####################################################################
