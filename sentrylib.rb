@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env ruby
-# Sentry 2.1 - By Joel Parker Henderson - joelparkerhenderson@gmail.com
-# Copyright 2006 - Creative Commons NonCommercial-ShareAlike 2.5 License
+# Sentry 2.3.0 - By Joel Parker Henderson - joelparkerhenderson@gmail.com
+# Copyright 2006-2014 - Creative Commons NonCommercial-ShareAlike 2.5 License
 
 require 'net/http'
 require 'net/smtp'
@@ -15,11 +15,15 @@ def get_response (uri)
  return res
 end
 
+def get_response_body (uri)
+ get_response(uri).body
+end
+
 
 #### TIME ####################################################################
 
 def speedtest
-  start = Time.now 
+  start = Time.now
   yield
   stop = Time.now
   return stop-start
@@ -33,7 +37,7 @@ def send_message (msg,from,to)
 end
 
 def send_message_with_headers (msg,from,to,subj)
-  send_message("From: #{from}\nTo: #{to}\nSubject: #{subj}\n\n"+msg,from,to)  
+  send_message("From: #{from}\nTo: #{to}\nSubject: #{subj}\n\n"+msg,from,to)
 end
 
 
@@ -41,9 +45,8 @@ end
 
 class Array
   def to_h(hash={})
-    a = to_a 
+    a = to_a
     0.step(a.size,2) { |i| hash[a[i]]=a[i+1] }
     hash
   end
 end
-

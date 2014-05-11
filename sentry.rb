@@ -1,9 +1,13 @@
-# -*- coding: utf-8 -*-
 #!/usr/bin/env ruby
 # Sentry 2.3.0 - By Joel Parker Henderson - joelparkerhenderson@gmail.com
 # Copyright 2006-2014 - Creative Commons NonCommercial-ShareAlike 2.5 License
 
-require 'sentrylib'
+module Sentry
+end
+
+require_relative 'sentrylib'
+require_relative 'sentry/watch_abstract'
+require_relative 'sentry/watch_uri'
 
 
 #### ARGS ####################################################################
@@ -34,13 +38,13 @@ if !uri
   exit -1
 end
 
+
 #### MAIN ####################################################################
 
 begin
-  uri = URI.parse(uri)
-  res = nil
-  secs = speedtest { n.times { res = get_response(uri) } } / n
-  text = res.body
+  watch = Sentry::WatchURI.new(URI.parse(uri))
+  secs = speedtest { n.times { watch.run } } / n
+  text = watch.text
   message = "#{secs} secs average for #{n} #{uri}"
   if slow > 0 and secs > slow then raise "Too slow: #{secs}>#{slow}" end
   if include and !text.index(include) then raise "Failed include: #{include}" end
