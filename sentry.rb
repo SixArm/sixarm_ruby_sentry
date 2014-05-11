@@ -10,7 +10,7 @@ require 'sentrylib'
 
 args = ARGV.to_h
 
-uri          = args['--uri'] || 'http://localhost/'
+uri          = args['--uri']
 n            = args['-n'].to_i | 1
 slow         = args['-s'].to_f
 mail_to      = args['--mail-to'] || ENV['USER'] || ENV['USERNAME']
@@ -19,6 +19,20 @@ mail_subject = args['--mail-subject'] || 'Sentry Alert'
 include      = args['--include']
 exclude      = args['--exclude']
 
+
+#### HELP ###################################################################
+
+if !uri
+  puts "Sentry"
+  puts ""
+  puts "Please specify something to watch."
+  puts ""
+  puts "Example:"
+  puts ""
+  puts "   sentry --uri http://www.example.com"
+  puts ""
+  exit -1
+end
 
 #### MAIN ####################################################################
 
