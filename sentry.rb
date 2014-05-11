@@ -6,12 +6,12 @@
 require 'sentrylib'
 args = ARGV.to_h
 
-uri     = args['-uri'] || 'http://localhost/'
+uri     = args['--uri'] || 'http://localhost/'
 n       = args['-n'].to_i | 1
 slow    = args['-s'].to_f
-to      = args['-to']
-include = args['-include']
-exclude = args['-exclude']
+to      = args['--to']
+include = args['--include']
+exclude = args['--exclude']
 
 begin
   uri = URI.parse(uri)
