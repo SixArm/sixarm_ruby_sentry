@@ -4,6 +4,10 @@
 # Copyright 2006-2014 - Creative Commons NonCommercial-ShareAlike 2.5 License
 
 require 'sentrylib'
+
+
+#### ARGS ####################################################################
+
 args = ARGV.to_h
 
 uri          = args['--uri'] || 'http://localhost/'
@@ -14,6 +18,9 @@ mail_from    = args['--mail-from'] || 'sentry'
 mail_subject = args['--mail-subject'] || 'Sentry Alert'
 include      = args['--include']
 exclude      = args['--exclude']
+
+
+#### MAIN ####################################################################
 
 begin
   uri = URI.parse(uri)
