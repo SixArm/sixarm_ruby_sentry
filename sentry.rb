@@ -8,6 +8,7 @@ end
 require_relative 'sentry/helpers/array'
 require_relative 'sentry/helpers/http'
 require_relative 'sentry/helpers/smtp'
+require_relative 'sentry/helpers/system'
 require_relative 'sentry/helpers/time'
 require_relative 'sentry/watch_abstract'
 require_relative 'sentry/watch_uri'
