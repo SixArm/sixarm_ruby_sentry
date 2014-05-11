@@ -20,11 +20,12 @@ require_relative 'sentry/watch_uri'
 args = ARGV.to_h
 
 uri          = args['--uri']
+
 n            = args['-n'].to_i | 1
 slow         = args['-s'].to_f
 
-include      = args['--include']
-exclude      = args['--exclude']
+include      = args['-i'] || args['--include']
+exclude      = args['-e'] || args['--exclude']
 
 mail_flag    = args['--mail']         || mail_flag_default
 mail_to      = args['--mail-to']      || mail_to_default
