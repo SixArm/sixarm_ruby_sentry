@@ -27,7 +27,7 @@ exclude      = args['--exclude']
 
 #### HELP ###################################################################
 
-if !uri
+def help
   puts "Sentry"
   puts ""
   puts "Please specify something to watch."
@@ -36,11 +36,15 @@ if !uri
   puts ""
   puts "   sentry --uri http://www.example.com"
   puts ""
-  exit -1
 end
 
 
 #### MAIN ####################################################################
+
+if !uri
+  help
+  exit -1
+end
 
 begin
   watch = Sentry::WatchURI.new(URI.parse(uri))
