@@ -40,10 +40,11 @@ begin
   uri = URI.parse(uri)
   res = nil
   secs = speedtest { n.times { res = get_response(uri) } } / n
+  text = res.body
   message = "#{secs} secs average for #{n} #{uri}"
   if slow > 0 and secs > slow then raise "Too slow: #{secs}>#{slow}" end
-  if include and !res.body.index(include) then raise "Failed include: #{include}" end
-  if exclude and  res.body.index(exclude) then raise "Failed exclude: #{exclude}" end
+  if include and !text.index(include) then raise "Failed include: #{include}" end
+  if exclude and  text.index(exclude) then raise "Failed exclude: #{exclude}" end
   puts message
 rescue
   puts vitals = [uri,$!,message,`date`,`uname -a`,`w`,`ps -ef`] * "\n\n"
