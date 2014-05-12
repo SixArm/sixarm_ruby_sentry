@@ -30,20 +30,20 @@ Test a web page:
 
 Test ten times:
 
-    sentry --uri http://www.my.com -n 10
+    sentry --uri http://www.example.com -n 10
 
 Test the speed is two seconds or faster:
 
-    sentry --uri http://www.my.com -s 2
+    sentry --uri http://www.example.com -s 2
 
 The result must include this text:
 
-    sentry --uri http://www.my.com
+    sentry --uri http://www.example.com
            --include "Success"
 
 The result must exclude this text:
 
-    sentry --uri http://www.my.com
+    sentry --uri http://www.example.com
            --exclude "Failure"
 
 Send errors via mail, using default settings:
