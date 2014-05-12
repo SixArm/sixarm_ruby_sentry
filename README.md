@@ -65,6 +65,11 @@ Send errors via mail, using custom settings:
 ## Options
 
 
+Help:
+
+  * `-h, --help`              Print help.
+
+
 Watcher:
 
   * `--uri (uri)`:            Specify a URI to fetch.
@@ -74,18 +79,18 @@ Watcher:
 
 Text search:
 
-  * `-i --include (text)`:    The response text must include this text.
+  * `-i, --include (text)`:   The response text must include this text.
                               Example: `--include "Success"`
 
-  * `-e --exclude (text)`:    The response text must *not* include this text.
+  * `-e, --exclude (text)`:   The response text must *not* include this text.
                               Example: `--exclude "Failure"`
 
 Diagnostics:
 
-  * `-n --number (count)`:    How many times to run the test.
+  * `-n, --number (count)`:   How many times to run the test.
                               Example: `--number 10`
 
-  * `-s --speed (seconds)`:   The average speed must be this speed or faster.
+  * `-s, --speed (seconds)`:  The average speed must be this speed or faster.
                               Example: `--speed 1.00`
 
 
@@ -112,13 +117,13 @@ Mail:
 
 System:
 
-  * `-u --user (user name)`:  The local system user name.
+  * `--user (user name)`:     The local system user name.
                               Default is `ENV` `USER` or `ENV USERNAME`,
                               or calling the system command `whoami`.
                               This is for email defaults for "from" and "to".
                               This is typically not needed.
 
-  * `-h --host (host name)`:  The local system host name.
+  * `--host (host name)`:     The local system host name.
                               Default is `ENV HOST` or `ENV HOSTNAME`,
                               or calling the system reverse DNS lookup.
                               This is used in email defaults.
