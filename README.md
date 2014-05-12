@@ -24,22 +24,34 @@ we suggest trying Nagios, Monit, and similar software.
 
 ## Examples
 
-Example: how do I test the web page speed of my local machine?
+Test a web page:
 
-    sentry --uri http://localhost
+    sentry --uri http://www.example.com
 
-Example: how do I test the web page speed of another web page 5 times?
+Test ten times:
 
-    sentry --uri http://www.my.com -n 5
+    sentry --uri http://www.my.com -n 10
 
-Example: how do I test the web page speed of another web page 5 times,
-ensure the speed is within 2 seconds, the page says "Hello" as it should,
-and have any errors emailed to me along with various system diagnostics?
+Test the speed is two seconds or faster:
+
+    sentry --uri http://www.my.com -s 2
+
+Test the result text:
 
     sentry --uri http://www.my.com
-           --number 5
-           --speed 2.00
-           --include "hello world"
+           --include "Success"
+
+    sentry --uri http://www.my.com
+           --exclude "Failure"
+
+Send errors via mail:
+
+    sentry --uri http://www.example.com
+           --mail
+
+Send errors via mail with custom settings:
+
+    sentry --uri http://www.example.com
            --mail-to alice@example.com
            --mail-from bob@example.com
            --mail-subject "Alert!"
