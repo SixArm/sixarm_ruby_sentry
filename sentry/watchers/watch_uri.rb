@@ -7,7 +7,7 @@ class Sentry::WatchURI < Sentry::WatchAbstract
   end
 
   def name
-    "Watch URI #{uri}"
+    "Sentry: Watch URI #{uri}"
   end
 
   def run

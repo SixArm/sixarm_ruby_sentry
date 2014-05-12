@@ -7,7 +7,7 @@ class Sentry::WatchDNS < Sentry::WatchAbstract
   end
 
   def name
-    "Watch DNS #{host}"
+    "Sentry: Watch DNS #{host}"
   end
 
   def run
