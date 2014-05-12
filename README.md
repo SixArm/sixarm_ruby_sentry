@@ -27,36 +27,35 @@ we suggest trying Nagios, Monit, and similar software.
 ## Examples
 
 
-Test that the system can successfully fetch a web page URI or resolve a DNS host name:
+Test that the system can successfully fetch a URI:
 
-    sentry --uri http://www.example.com
+    sentry www.example.com
+
+Test DNS lookup:
 
     sentry --dns www.example.com
 
 Test that the result must include text and/or exclude text:
 
-    sentry --uri http://www.example.com
+    sentry www.example.com
            --include "Success"
-
-    sentry --uri http://www.example.com
            --exclude "Failure"
 
 Test ten times:
 
-    sentry --uri http://www.example.com -n 10
+    sentry www.example.com -n 10
 
-Test the speed is two seconds or faster:
+Test the speed is within two seconds:
 
-    sentry --uri http://www.example.com -s 2
+    sentry www.example.com -s 2
 
-Send errors via mail, using default settings:
+Send errors via mail using default settings:
 
-    sentry --uri http://www.example.com
-           --mail
+    sentry www.example.com --mail
 
-Send errors via mail, using custom settings:
+Send errors via mail using custom settings:
 
-    sentry --uri http://www.example.com
+    sentry www.example.com
            --mail-to alice@example.com
            --mail-from bob@example.com
            --mail-subject "Alert!"
@@ -72,7 +71,7 @@ Help:
 
 Watcher:
 
-  * `--uri (uri)`:            Specify a URI to fetch.
+  * `--uri (uri)`:            Specify a URI to fetch. Default is to use HTTP.
 
   * `--dns (host name)`:      Specify a DNS host name to resolve.
 
@@ -87,7 +86,7 @@ Text search:
 
 Diagnostics:
 
-  * `-n, --number (count)`:   How many times to run the test.
+  * `-n, --number (count)`:   How many times to run the test. Default is 1.
                               Example: `--number 10`
 
   * `-s, --speed (seconds)`:  The average speed must be this speed or faster.
@@ -132,7 +131,7 @@ System:
 
 ## Changes
 
-* 2014-05-12 3.0.0 Add DNS resolve watcher
+* 2014-05-12 3.0.0 Add DNS resolver, options parser, error handing
 * 2014-05-10 2.3.0 Update for Ruby 2
 * 2006-xx-xx 2.2.0 Create using Ruby 1
 
