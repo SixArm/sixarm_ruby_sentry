@@ -3,5 +3,5 @@ def user_name_default
 end
 
 def host_name_default
-  ENV['HOST'] || ENV['HOSTNAME'] || (x = Socket.gethostbyname(Socket.gethostname) ? x.first : 'localhost')
+  ENV['HOST'] || ENV['HOSTNAME'] || ((host = Socket.gethostbyname(Socket.gethostname)) ? host.first : 'localhost')
 end
