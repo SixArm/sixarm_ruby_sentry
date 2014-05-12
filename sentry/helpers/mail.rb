@@ -1,7 +1,3 @@
-def mail_flag_default
-  false
-end
-
 def mail_to_default
   user_name_default
 end
