@@ -18,6 +18,7 @@ require 'resolv-replace'
 require_relative 'sentry/help'
 require_relative 'sentry/helpers/array'
 require_relative 'sentry/helpers/http'
+require_relative 'sentry/helpers/mail'
 require_relative 'sentry/helpers/smtp'
 require_relative 'sentry/helpers/system'
 require_relative 'sentry/helpers/time'
@@ -67,23 +68,4 @@ rescue
   if mail_flag
     send_message_with_headers(vitals, mail_from, mail_to, mail_subject)
   end
-end
-
-
-#### MAIL ####################################################################
-
-def mail_flag_default
-  false
-end
-
-def mail_to_default
-  user_name_default
-end
-
-def mail_from_default
-  'sentry'
-end
-
-def mail_subject_default
-  'Sentry Alert'
 end
