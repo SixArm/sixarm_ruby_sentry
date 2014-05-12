@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+#
 # Sentry 2.3.0 - By Joel Parker Henderson - joelparkerhenderson@gmail.com
 # Copyright 2006-2014 - Creative Commons NonCommercial-ShareAlike 2.5 License
 
@@ -48,7 +49,7 @@ begin
   secs = speedtest { n.times { watch.run } } / n
   text = watch.text
   message = "#{secs} secs average for #{n} #{uri}"
-  if slow > 0 and secs > slow then raise "Too slow: #{secs}>#{slow}" end
+  if speed > 0 and secs > speed then raise "Too slow: #{secs}>#{speed}" end
   if include and !text.index(include_text) then raise "Failed include: #{include_text}" end
   if exclude and  text.index(exclude_text) then raise "Failed exclude: #{exclude_text}" end
   puts message
