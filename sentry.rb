@@ -24,8 +24,8 @@ uri          = args['--uri']
 n            = (args['-n'] || args['--number'] || 1).to_i
 slow         = (args['-s'] || args['--speed'] || 0.00).to_f
 
-include      = args['-i'] || args['--include']
-exclude      = args['-e'] || args['--exclude']
+include_text = args['-i'] || args['--include']
+exclude_text = args['-e'] || args['--exclude']
 
 mail_flag    = args['--mail']         || mail_flag_default
 mail_to      = args['--mail-to']      || mail_to_default
@@ -49,8 +49,8 @@ begin
   text = watch.text
   message = "#{secs} secs average for #{n} #{uri}"
   if slow > 0 and secs > slow then raise "Too slow: #{secs}>#{slow}" end
-  if include and !text.index(include) then raise "Failed include: #{include}" end
-  if exclude and  text.index(exclude) then raise "Failed exclude: #{exclude}" end
+  if include and !text.index(include_text) then raise "Failed include: #{include_text}" end
+  if exclude and  text.index(exclude_text) then raise "Failed exclude: #{exclude_text}" end
   puts message
 rescue
   puts vitals = [uri,$!,message,`date`,`uname -a`,`w`,`ps -ef`] * "\n\n"
