@@ -116,46 +116,39 @@ optparse.parse!
 
 #### MAIN ####################################################################
 
-if !(options.dns || options.uri)
+watch = nil
+
+if ARGV.empty?
   help
-  exit -1
+  exit
 end
 
-watch = nil
-p options
-p ARGV
+if !(options.dns || options.uri)
+  options.uri = ARGV.shift
+end
 
 begin
-
-puts "here"
 
   # Create
   watch = \
     if options.dns
-      p "dns"
       Sentry::WatchDNS.new(options.dns)
     elsif options.uri
-      x = options.uri
-      p x
-      x.index('://') or x = "http://#{x}"
-      p x
-      uri = URI.parse(x)
-      p "uri:#{uri}"
+      uri = URI.parse(options.uri.index('://') ? options.uri : "http://#{options.uri}")
       Sentry::WatchURI.new(uri)
     else
       raise
     end
 
-  puts "here2"
   puts watch.name
 
   ## Run
   n = options.n || 1
   secs = speedtest { n.times { watch.run } } / n
-  message = "Sentry #{watch.name} => speed:#{secs}s" + ((n==1) ? "" : " (avg, n=#{n})")
+  message = "#{watch.name} => speed:#{secs}s" + ((n==1) ? "" : " (avg, n=#{n})")
 
   ## Speed OK?
-  x = options.speed; if secs > x then raise "Too slow: #{secs}>#{x}" end
+  x = options.speed; if x && (x = x.to_f) && secs > x then raise "Too slow: #{secs} > #{x}" end
 
   ## Text OK?
   x = options.include_text; if x && !watch.text.index(x) then raise "Failed include: #{x}" end
