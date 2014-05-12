@@ -15,8 +15,8 @@ require 'socket'
 require 'resolv'
 require 'resolv-replace'
 
+require_relative 'sentry/extensions/array'
 require_relative 'sentry/help'
-require_relative 'sentry/helpers/array'
 require_relative 'sentry/helpers/http'
 require_relative 'sentry/helpers/mail'
 require_relative 'sentry/helpers/smtp'
@@ -33,12 +33,12 @@ args = ARGV.to_h
 uri          = args['--uri']
 
 n            = (args['-n'] || args['--number'] || 1).to_i
-slow         = (args['-s'] || args['--speed'] || 0.00).to_f
+speed        = (args['-s'] || args['--speed'] || 0.00).to_f
 
 include_text = args['-i'] || args['--include']
 exclude_text = args['-e'] || args['--exclude']
 
-mail_flag    = args['--mail']         || mail_flag_default
+mail_flag    = args['--mail']         || args['--mail-to'] || args['--mail-to'] || args['--mail-to']
 mail_to      = args['--mail-to']      || mail_to_default
 mail_from    = args['--mail-from']    || mail_from_default
 mail_subject = args['--mail-subject'] || mail_subject_default
@@ -65,6 +65,7 @@ begin
   puts message
 rescue
   puts vitals = [uri,$!,message,`date`,`uname -a`,`w`,`ps -ef`] * "\n\n"
+
   if mail_flag
     send_message_with_headers(vitals, mail_from, mail_to, mail_subject)
   end
