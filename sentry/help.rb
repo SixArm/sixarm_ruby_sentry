@@ -5,6 +5,8 @@ def help
   puts ""
   puts "Example:"
   puts ""
+  puts "   sentry --dns www.example.com"
+  puts ""
   puts "   sentry --uri http://www.example.com"
   puts ""
 end
