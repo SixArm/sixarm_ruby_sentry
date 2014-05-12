@@ -22,9 +22,9 @@ require_relative 'sentry/helpers/mail'
 require_relative 'sentry/helpers/smtp'
 require_relative 'sentry/helpers/system'
 require_relative 'sentry/helpers/time'
-require_relative 'sentry/watch_abstract'
-require_relative 'sentry/watch_dns'
-require_relative 'sentry/watch_uri'
+require_relative 'sentry/watchers/watch_abstract'
+require_relative 'sentry/watchers/watch_dns'
+require_relative 'sentry/watchers/watch_uri'
 
 
 #### ARGS ####################################################################
@@ -66,11 +66,11 @@ begin
       raise
     end
   secs = speedtest { n.times { watch.run } } / n
-  text = watch.text
-  message = "#{secs} secs average for #{n} #{uri}"
+  message = "#{secs} secs average, #{n} number of times, #{uri}"
   if speed > 0 and secs > speed then raise "Too slow: #{secs}>#{speed}" end
-  if include and !text.index(include_text) then raise "Failed include: #{include_text}" end
-  if exclude and  text.index(exclude_text) then raise "Failed exclude: #{exclude_text}" end
+  text = watch.text
+  if include_text && !text.index(include_text) then raise "Failed include: #{include_text}" end
+  if exclude_text &&  text.index(exclude_text) then raise "Failed exclude: #{exclude_text}" end
   puts message
 rescue
   puts vitals = [uri,$!,message,`date`,`uname -a`,`w`,`ps -ef`] * "\n\n"
