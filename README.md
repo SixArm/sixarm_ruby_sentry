@@ -4,11 +4,13 @@
 * Repo: <http://github.com/sixarm/sixarm_ruby_sentry>
 * Email: Joel Parker Henderson, <joel@sixarm.com>
 
+
 ## Introduction
+
 
 Sentry is a script for simple system monitoring:
 
-  * Sentry can fetch a web page URI.
+  * Sentry can fetch a web page URI, or resolve a DNS name.
 
   * And do multiple attempts if you want.
 
@@ -24,9 +26,20 @@ we suggest trying Nagios, Monit, and similar software.
 
 ## Examples
 
-Test a web page:
+
+Test that the system can successfully fetch a web page URI or resolve a DNS host name:
 
     sentry --uri http://www.example.com
+
+    sentry --dns www.example.com
+
+Test that the result must include text and/or exclude text:
+
+    sentry --uri http://www.example.com
+           --include "Success"
+
+    sentry --uri http://www.example.com
+           --exclude "Failure"
 
 Test ten times:
 
@@ -35,16 +48,6 @@ Test ten times:
 Test the speed is two seconds or faster:
 
     sentry --uri http://www.example.com -s 2
-
-The result must include this text:
-
-    sentry --uri http://www.example.com
-           --include "Success"
-
-The result must exclude this text:
-
-    sentry --uri http://www.example.com
-           --exclude "Failure"
 
 Send errors via mail, using default settings:
 
@@ -61,19 +64,15 @@ Send errors via mail, using custom settings:
 
 ## Options
 
-Watcher options:
+
+Watcher:
 
   * `--uri (uri)`:            Specify a URI to fetch.
 
-Diagnostic options:
+  * `--dns (host name)`:      Specify a DNS host name to resolve.
 
-  * `-n --number (count)`:    How many times to run the test.
-                              Example: `--number 10`
 
-  * `-s --speed (seconds)`:   The average speed must be this speed or faster.
-                              Example: `--speed 1.00`
-
-Text search options:
+Text search:
 
   * `-i --include (text)`:    The response text must include this text.
                               Example: `--include "Success"`
@@ -81,7 +80,16 @@ Text search options:
   * `-e --exclude (text)`:    The response text must *not* include this text.
                               Example: `--exclude "Failure"`
 
-Mail options:
+Diagnostics:
+
+  * `-n --number (count)`:    How many times to run the test.
+                              Example: `--number 10`
+
+  * `-s --speed (seconds)`:   The average speed must be this speed or faster.
+                              Example: `--speed 1.00`
+
+
+Mail:
 
   * `--mail`:                 Send errors via mail? If this arg exists,
                               then the script uses the default mail settings.
@@ -102,7 +110,7 @@ Mail options:
                               Default is `"Sentry Alert"`
 
 
-System options:
+System:
 
   * `-u --user (user name)`:  The local system user name.
                               Default is `ENV` `USER` or `ENV USERNAME`,
@@ -119,7 +127,8 @@ System options:
 
 ## Changes
 
-* 2014-05-12 2.3.0 Update for Ruby 2
+* 2014-05-12 3.0.0 Add DNS resolve watcher
+* 2014-05-10 2.3.0 Update for Ruby 2
 * 2006-xx-xx 2.2.0 Create using Ruby 1
 
 

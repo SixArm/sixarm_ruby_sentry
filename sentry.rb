@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Sentry 2.3.0 - By Joel Parker Henderson - joelparkerhenderson@gmail.com
+# Sentry 3.0.0 - By Joel Parker Henderson - joelparkerhenderson@gmail.com
 # Copyright 2006-2014 - Creative Commons NonCommercial-ShareAlike 2.5 License
 
 
@@ -23,6 +23,7 @@ require_relative 'sentry/helpers/smtp'
 require_relative 'sentry/helpers/system'
 require_relative 'sentry/helpers/time'
 require_relative 'sentry/watch_abstract'
+require_relative 'sentry/watch_dns'
 require_relative 'sentry/watch_uri'
 
 
@@ -30,6 +31,7 @@ require_relative 'sentry/watch_uri'
 
 args = ARGV.to_h
 
+dns          = args['--dns']
 uri          = args['--uri']
 
 n            = (args['-n'] || args['--number'] || 1).to_i
@@ -49,13 +51,20 @@ host_name    = args['-h'] || args['--host'] || host_name_default
 
 #### MAIN ####################################################################
 
-if !uri
+if !(dns || uri)
   help
   exit -1
 end
 
 begin
-  watch = Sentry::WatchURI.new(URI.parse(uri))
+  watch = \
+    if dns
+      Sentry::WatchDNS.new(dns)
+    elsif uri
+      Sentry::WatchURI.new(URI.parse(uri))
+    else
+      raise
+    end
   secs = speedtest { n.times { watch.run } } / n
   text = watch.text
   message = "#{secs} secs average for #{n} #{uri}"
@@ -65,7 +74,6 @@ begin
   puts message
 rescue
   puts vitals = [uri,$!,message,`date`,`uname -a`,`w`,`ps -ef`] * "\n\n"
-
   if mail_flag
     send_message_with_headers(vitals, mail_from, mail_to, mail_subject)
   end
