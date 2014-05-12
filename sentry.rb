@@ -21,8 +21,8 @@ args = ARGV.to_h
 
 uri          = args['--uri']
 
-n            = args['-n'].to_i | 1
-slow         = args['-s'].to_f
+n            = (args['-n'] || args['--number'] || 1).to_i
+slow         = (args['-s'] || args['--speed'] || 0.00).to_f
 
 include      = args['-i'] || args['--include']
 exclude      = args['-e'] || args['--exclude']

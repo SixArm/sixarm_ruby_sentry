@@ -8,33 +8,79 @@ Sentry reports errors with diagnostics, and can send these to email.
 
 Syntax: sentry [options]
 
-  --uri http://www.my.com  == specify URI to load
 
-  -n 10                    == load the page n times, average the results
-  -s 1.00                  == if average time > s then raise "Too slow"
-
-  --include foo            == result text must contain the text 'foo'
-  --exclude foo            == result text must NOT contain text 'foo'
-
-  --mail                   == send errors via mail?
-  --mail-to <address>      == send mail to this email address
-  --mail-from <address>    == send mail from this email address
-  --mail-subject <text>    == send mail using this subject
+## Examples
 
 Example: how do I test the web page speed of my local machine?
 
-  sentry --uri http://localhost
+    sentry --uri http://localhost
 
 Example: how do I test the web page speed of another web page 5 times?
 
-  sentry --uri http://www.my.com -n 5
+    sentry --uri http://www.my.com -n 5
 
 Example: how do I test the web page speed of another web page 5 times,
 ensure the speed is within 2 seconds, the page says "Hello" as it should,
 and have any errors emailed to me along with various system diagnostics?
 
-  sentry --uri http://www.my.com -n 5 -s 2 \
-         --include Hello \
-         --mail-to me@example.com
-         --mail-from sentry@example.com
-         --mail-subject "Sentry Alert!"
+    sentry --uri http://www.my.com
+           --number 5
+           --speed 2.00
+           --include "hello world"
+           --mail-to alice@example.com
+           --mail-from bob@example.com
+           --mail-subject "Alert!"
+
+
+## Options
+
+Watcher options:
+
+   * --uri <uri>:            Specify a URI to fetch.
+
+Diagnostic options:
+
+   * -n --number <count>:    How many times to run the test.
+                             Example: -n 10
+
+   * -s --speed <seconds>:   The average speed must be this speed or faster.
+                             Example: -s 1.00
+
+Text search options:
+
+   * -i --include <text>:    The response text must include this text.
+                             Example: -i "foo bar"
+
+   * -e --exclude <text>:    The response text must *not* include this text.
+                             Example: -e "foo bar"
+
+Mail options:
+
+   * --mail:                 Send errors via mail?
+
+   * --mail-to <address>:    Send mail to this email address.
+                             Example: --mail-to alice@example.com
+                             Default is user@host.
+
+   * --mail-from <address>:  Send mail from this email address
+                             Example: --mail-from bob@example.com
+                             Default is user@host.
+
+   * --mail-subject <text>:  Send mail using this subject.
+                             Example: "Please read this email now"
+                             Default is "Sentry Alert"
+
+
+System options:
+
+   * -u --user <user name>:  The local system user name.
+                             Default is ENV 'USER' or 'USERNAME',
+                             or calling the system command `whoami`.
+                             This is for email defaults for "from" and "to".
+                             This is typically not needed.
+
+   * -h --host <host name>:  The local system host name
+                             Default is ENV 'HOST' or 'HOSTNAME',
+                             or calling the system reverse DNS lookup.
+                             This is used in email defaults.
+                             This is typically not needed.
