@@ -1,4 +1,4 @@
-# SixArm.com » Ruby » <br> Sentry script for simple system monitoring
+# SixArm.com » Ruby » <br> Sentry script system monitoring
 
 * Link: <http://sixarm.com/sixarm_ruby_sentry/doc>
 * Repo: <http://github.com/sixarm/sixarm_ruby_sentry>
@@ -6,17 +6,97 @@
 
 ## Introduction
 
-Sentry is a script for simple system monitring.
+Sentry is a script for simple system monitoring:
 
-  * Fetch a web page URI or resolve a DNS name.
+  * Sentry can fetch a web page URI.
 
-  * Do multiple attempts if you want.
+  * And do multiple attempts if you want.
 
-  * See if the results are fast enough.
+  * And calculate if results are fast enough.
 
-  * Report errors with diagnostics.
+  * If there's an error, then Sentry prints diagnostics.
 
-  * Send email alerts.
+  * And can send email alerts.
+
+If you're interested in this kind of monitoring,
+we suggest trying Nagios, Monit, and similar software.
+
+
+## Examples
+
+Example: how do I test the web page speed of my local machine?
+
+    sentry --uri http://localhost
+
+Example: how do I test the web page speed of another web page 5 times?
+
+    sentry --uri http://www.my.com -n 5
+
+Example: how do I test the web page speed of another web page 5 times,
+ensure the speed is within 2 seconds, the page says "Hello" as it should,
+and have any errors emailed to me along with various system diagnostics?
+
+    sentry --uri http://www.my.com
+           --number 5
+           --speed 2.00
+           --include "hello world"
+           --mail-to alice@example.com
+           --mail-from bob@example.com
+           --mail-subject "Alert!"
+
+
+## Options
+
+Watcher options:
+
+   * --uri <uri>:            Specify a URI to fetch.
+
+Diagnostic options:
+
+   * -n --number <count>:    How many times to run the test.
+                             Example: -n 10
+
+   * -s --speed <seconds>:   The average speed must be this speed or faster.
+                             Example: -s 1.00
+
+Text search options:
+
+   * -i --include <text>:    The response text must include this text.
+                             Example: -i "foo bar"
+
+   * -e --exclude <text>:    The response text must *not* include this text.
+                             Example: -e "foo bar"
+
+Mail options:
+
+   * --mail:                 Send errors via mail?
+
+   * --mail-to <address>:    Send mail to this email address.
+                             Example: --mail-to alice@example.com
+                             Default is user@host.
+
+   * --mail-from <address>:  Send mail from this email address
+                             Example: --mail-from bob@example.com
+                             Default is user@host.
+
+   * --mail-subject <text>:  Send mail using this subject.
+                             Example: "Please read this email now"
+                             Default is "Sentry Alert"
+
+
+System options:
+
+   * -u --user <user name>:  The local system user name.
+                             Default is ENV 'USER' or 'USERNAME',
+                             or calling the system command `whoami`.
+                             This is for email defaults for "from" and "to".
+                             This is typically not needed.
+
+   * -h --host <host name>:  The local system host name
+                             Default is ENV 'HOST' or 'HOSTNAME',
+                             or calling the system reverse DNS lookup.
+                             This is used in email defaults.
+                             This is typically not needed.
 
 Please read sentry.txt for details.
 
