@@ -3,8 +3,17 @@
 # Sentry 2.3.0 - By Joel Parker Henderson - joelparkerhenderson@gmail.com
 # Copyright 2006-2014 - Creative Commons NonCommercial-ShareAlike 2.5 License
 
+
+#### REQS ####################################################################
+
 module Sentry
 end
+
+require 'net/http'
+require 'net/smtp'
+require 'socket'
+require 'resolv'
+require 'resolv-replace'
 
 require_relative 'sentry/help'
 require_relative 'sentry/helpers/array'
