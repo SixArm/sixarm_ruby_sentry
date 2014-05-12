@@ -49,54 +49,58 @@ and have any errors emailed to me along with various system diagnostics?
 
 Watcher options:
 
-   * `--uri (uri)`:            Specify a URI to fetch.
+  * `--uri (uri)`:            Specify a URI to fetch.
 
 Diagnostic options:
 
-   * `-n --number (count)`:    How many times to run the test.
-                               Example: `--number 10`
+  * `-n --number (count)`:    How many times to run the test.
+                              Example: `--number 10`
 
-   * `-s --speed (seconds)`:   The average speed must be this speed or faster.
-                               Example: `--speed 1.00`
+  * `-s --speed (seconds)`:   The average speed must be this speed or faster.
+                              Example: `--speed 1.00`
 
 Text search options:
 
-   * `-i --include (text)`:    The response text must include this text.
-                               Example: `--include "Success"`
+  * `-i --include (text)`:    The response text must include this text.
+                              Example: `--include "Success"`
 
-   * `-e --exclude (text)`:    The response text must *not* include this text.
-                               Example: `--exclude "Failure"`
+  * `-e --exclude (text)`:    The response text must *not* include this text.
+                              Example: `--exclude "Failure"`
 
 Mail options:
 
-   * `--mail`:                 Send errors via mail?
+  * `--mail`:                 Send errors via mail? If this arg exists,
+                              then the script uses the default mail settings.
+                              This flag is automatically set to true if any of
+                              the other mail args exist.
+                              Example: `--mail`
 
-   * `--mail-to (address)`:    Send mail to this email address.
-                               Example: `--mail-to alice@example.com`
-                               Default is `user` at `host`.
+  * `--mail-to (address)`:    Send mail to this email address.
+                              Example: `--mail-to alice@example.com`
+                              Default is `user` at `host`.
 
-   * `--mail-from (address)`:  Send mail from this email address
-                               Example: `--mail-from bob@example.com`
-                               Default is `user` at `host`.
+  * `--mail-from (address)`:  Send mail from this email address
+                              Example: `--mail-from bob@example.com`
+                              Default is `user` at `host`.
 
-   * `--mail-subject (text)`:  Send mail using this subject.
-                               Example: `--mail-subject "Urgent"`
-                               Default is `"Sentry Alert"`
+  * `--mail-subject (text)`:  Send mail using this subject.
+                              Example: `--mail-subject "Urgent"`
+                              Default is `"Sentry Alert"`
 
 
 System options:
 
-   * `-u --user (user name)`:  The local system user name.
-                               Default is `ENV` `USER` or `USERNAME`,
-                               or calling the system command `whoami`.
-                               This is for email defaults for "from" and "to".
-                               This is typically not needed.
+  * `-u --user (user name)`:  The local system user name.
+                              Default is `ENV` `USER` or `ENV USERNAME`,
+                              or calling the system command `whoami`.
+                              This is for email defaults for "from" and "to".
+                              This is typically not needed.
 
-   * `-h --host (host name)`:  The local system host name.
-                               Default is `ENV` `HOST` or `HOSTNAME`,
-                               or calling the system reverse DNS lookup.
-                               This is used in email defaults.
-                               This is typically not needed.
+  * `-h --host (host name)`:  The local system host name.
+                              Default is `ENV HOST` or `ENV HOSTNAME`,
+                              or calling the system reverse DNS lookup.
+                              This is used in email defaults.
+                              This is typically not needed.
 
 
 ## Changes
