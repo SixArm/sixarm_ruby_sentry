@@ -36,20 +36,22 @@ Test the speed is two seconds or faster:
 
     sentry --uri http://www.my.com -s 2
 
-Test the result text:
+The result must include this text:
 
     sentry --uri http://www.my.com
            --include "Success"
 
+The result must exclude this text:
+
     sentry --uri http://www.my.com
            --exclude "Failure"
 
-Send errors via mail:
+Send errors via mail, using default settings:
 
     sentry --uri http://www.example.com
            --mail
 
-Send errors via mail with custom settings:
+Send errors via mail, using custom settings:
 
     sentry --uri http://www.example.com
            --mail-to alice@example.com
