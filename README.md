@@ -35,6 +35,10 @@ Test DNS lookup:
 
     sentry --dns www.example.com
 
+Test FTP fetch:
+
+    sentry ftp://user@password:ftp.example.com/foo/bar.txt
+
 Test that the result must include text and/or exclude text:
 
     sentry www.example.com
