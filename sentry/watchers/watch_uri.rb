@@ -15,7 +15,7 @@ class Sentry::WatchURI < Sentry::WatchAbstract
     when "http", "https"
       text = http_get_response_body(uri)
     when "ftp"
-      text = ftp_get_response_body(uri)
+      text = ftp_get_response_text(uri)
     else
       raise "URI scheme unknown: #{uri.scheme}"
     end
