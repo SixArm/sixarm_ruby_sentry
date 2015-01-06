@@ -166,4 +166,4 @@ This license is for the included software that is created by SixArm;
 some of the included software may have its own licenses, copyrights,
 authors, etc. and these do take precedence over the SixArm license.
 
-Copyright (c) 2006-2014 Joel Parker Henderson
+Copyright (c) 2006-2015 Joel Parker Henderson
