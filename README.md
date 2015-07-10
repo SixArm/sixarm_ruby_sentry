@@ -2,7 +2,7 @@
 
 * Link: <http://sixarm.com/sixarm_ruby_sentry/doc>
 * Repo: <http://github.com/sixarm/sixarm_ruby_sentry>
-* Email: Joel Parker Henderson, <joel@sixarm.com>
+<!--HEADER-SHUT-->
 
 
 ## Introduction
