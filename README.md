@@ -1,4 +1,4 @@
-SixArm.com → Ruby → <br> Sentry script system monitoring
+# SixArm.com → Ruby → <br> Sentry script system monitoring
 
 * Link: <http://sixarm.com/sixarm_ruby_sentry/doc>
 * Repo: <http://github.com/sixarm/sixarm_ruby_sentry>
