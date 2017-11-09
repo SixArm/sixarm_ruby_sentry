@@ -2,7 +2,7 @@
 
 * Link: <http://sixarm.com/sixarm_ruby_sentry/doc>
 * Repo: <http://github.com/sixarm/sixarm_ruby_sentry>
-<!--HEADER-SHUT-->
+<!--header-shut-->
 
 
 ## Introduction
